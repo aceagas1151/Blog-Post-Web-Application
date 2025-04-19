@@ -1,3 +1,4 @@
+*.suo
 .vs/
 .vs/Bloggie/v17/
 .vs/Bloggie/v16/
@@ -7,3 +8,6 @@ Bloggie/Bloggie.Web/obj/Debug/net8.0/
 Bloggie/.vs/Bloggie/v17/.suo
 Bloggie/Bloggie.Web/obj/
 Bloggie/.vs/Bloggie/v17/
+Bloggie/.vs/Bloggie/v17/DocumentLayout.json
+Bloggie/.vs/Bloggie/v17/DocumentLayout.backup.json
+Bloggie/.vs/Bloggie/v17/.suo
