@@ -2,6 +2,7 @@
 .vs/Bloggie/v17/
 .vs/Bloggie/v16/
 .vs/Bloggie/v17/.suo
-Bloggie.Web/obj/
 Bloggie.Web/obj/Debug/net8.0/
 Bloggie/Bloggie.Web/obj/Debug/net8.0/
+Bloggie/.vs/Bloggie/v17/.suo
+Bloggie/Bloggie.Web/obj/
