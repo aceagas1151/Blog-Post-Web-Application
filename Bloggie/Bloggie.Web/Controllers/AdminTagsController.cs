@@ -2,12 +2,15 @@
 using Bloggie.Web.Models.Domain;
 using Bloggie.Web.Models.ViewModels;
 using Bloggie.Web.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Bloggie.Web.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
     public class AdminTagsController : Controller
     {
         private BloggieDbContext _bloggieDbContext;
@@ -23,6 +26,7 @@ namespace Bloggie.Web.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ActionName("Add")]
         public async Task<IActionResult> SubmitTag(AddTagRequest addTagRequest)
@@ -38,6 +42,7 @@ namespace Bloggie.Web.Controllers
 
             return RedirectToAction("List"); 
         }
+
         [HttpGet]
         [ActionName("List")]
         public async Task<IActionResult> List()
@@ -46,6 +51,7 @@ namespace Bloggie.Web.Controllers
             var tags = await tagRepository.GetAllAsync();
             return View(tags);
         }
+
         [HttpGet]
         [ActionName("Edit")]
         public async Task<IActionResult> Edit(Guid id)
@@ -70,6 +76,7 @@ namespace Bloggie.Web.Controllers
 
             return View(null);
         }
+
         [HttpPost]
         public async Task<IActionResult> Edit(EditTagRequest editTagRequest)
         {
@@ -96,6 +103,7 @@ namespace Bloggie.Web.Controllers
 
             return RedirectToAction("Edit", new { id = editTagRequest.Id });
         }
+
         [HttpPost]
         public async Task<IActionResult> Delete(EditTagRequest editTagRequest)
         {
