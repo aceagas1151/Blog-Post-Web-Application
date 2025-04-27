@@ -4,7 +4,7 @@ namespace Bloggie.Web.Controllers
 {
     public class AdminUsersController : Controller
     {
-        public IActionResult Index()
+        public IActionResult List()
         {
             return View();
         }
