@@ -62,9 +62,7 @@ namespace Bloggie.Web.Controllers
                         DateAdded = blogComment.DateAdded,
                         Username = (await userManager.FindByIdAsync(blogComment.UserId.ToString())).UserName
                     });
-
                 }
-
 
                 blogDetailsViewModel = new BlogDetailsViewModel
                 {
