@@ -1,11 +1,27 @@
 ﻿@model List<Bloggie.Web.Models.Domain.Tag>
 @{
+    int nextPage = Convert.ToInt32(ViewBag.PageNumber + 1);
+    int previousPage = Convert.ToInt32(ViewBag.PageNumber - 1);
 }
 <div class="bg-secondary bg-opacity-10 py-2">
     <div class="container">
         <h1>Show All Tags - Admin Functionality</h1>
     </div>
 </div>
+
+<form method="get"
+asp-controller="AdminTags"
+asp-action="List">
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col col-md-3 d-flex">
+                <input type="text" class="form-control" name="searchQuery" value="@ViewBag.SearchQuery"/>
+                <button type="submit" class="btn btn-dark ms-3">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
+
 
 <div class="container py-5">
     @if (Model != null && Model.Any())
@@ -14,8 +30,55 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Name</th>
-                    <th>Display Name</th>
+                    <th>
+                        Name
+                        <span>
+                            <span>
+                                <a class="btn btn-light"
+                                asp-controller="AdminTags"
+                                asp-action="List"
+                                asp-route-sortBy="Name"
+                                asp-route-sortDirection="Asc"
+                                asp-route-searchQuery="@ViewBag.searchQuery">
+                                    <i class="bi bi-arrow-up-circle"></i>
+                                </a>
+                            </span>
+                            <span>
+                                <a class="btn btn-light"
+                                asp-controller="AdminTags"
+                                asp-action="List"
+                                asp-route-sortBy="Name"
+                                asp-route-sortDirection="Desc"
+                                asp-route-searchQuery="@ViewBag.searchQuery">
+                                    <i class="bi bi-arrow-down-circle"></i>
+                                </a>
+                            </span>
+                        </span>
+                    </th>
+                    <th>Display Name
+                        <span>
+                            <span>
+                                <a class="btn btn-light"
+                                asp-controller="AdminTags"
+                                asp-action="List"
+                                asp-route-sortBy="DisplayName"
+                                asp-route-sortDirection="Asc"
+                                asp-route-searchQuery="@ViewBag.searchQuery">
+                                    <i class="bi bi-arrow-up-circle"></i>
+                                </a>
+                            </span>
+                            <span>
+                                <a class="btn btn-light"
+                                asp-controller="AdminTags"
+                                asp-action="List"
+                                asp-route-sortBy="DisplayName"
+                                asp-route-sortDirection="Desc"
+                                asp-route-searchQuery="@ViewBag.searchQuery">
+                                    <i class="bi bi-arrow-down-circle"></i>
+                                </a>
+                            </span>
+                        </span>
+                    </th>
                     <th> </th>
                 </tr>
             </thead>
@@ -28,13 +91,51 @@
                         <td>@tag.DisplayName</td>
                         <td> 
                             <a asp-area="" asp-controller="AdminTags"
-                               asp-action="Edit"
-                               asp-route-id="@tag.Id">Edit</a>
+                            asp-action="Edit"
+                            asp-route-id="@tag.Id">Edit</a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-controller="AdminTags"
+                       asp-action="List"
+                       asp-route-pageNumber="@previousPage"
+                       asp-route-pageSize="@ViewBag.PageSize">
+                        Previous
+                    </a>
+                </li>
+
+                @for(int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item">
+                        <a class="page-link"
+                            asp-controller="AdminTags"
+                            asp-action="List"
+                            asp-route-pageNumber="@i"
+                            asp-route-pageSize="@ViewBag.PageSize">@i
+
+                        </a>
+                    </li>
+                }
+
+                <li class="page-item">
+                    <a class="page-link"
+                       asp-controller="AdminTags"
+                       asp-action="List"
+                       asp-route-pageNumber="@nextPage"
+                       asp-route-pageSize="@ViewBag.PageSize"> 
+                        Next
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
     }
     else
     {
